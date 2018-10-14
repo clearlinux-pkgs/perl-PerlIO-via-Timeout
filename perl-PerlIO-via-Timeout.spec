@@ -4,18 +4,15 @@
 #
 Name     : perl-PerlIO-via-Timeout
 Version  : 0.32
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/D/DA/DAMS/PerlIO-via-Timeout-0.32.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DA/DAMS/PerlIO-via-Timeout-0.32.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperlio-via-timeout-perl/libperlio-via-timeout-perl_0.32-1.debian.tar.xz
 Summary  : 'a PerlIO layer that adds read & write timeout to a handle'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-PerlIO-via-Timeout-license
-Requires: perl-PerlIO-via-Timeout-man
-Requires: perl(Module::Build::Tiny)
-Requires: perl(Test::SharedFork)
-Requires: perl(Test::TCP)
+Requires: perl-PerlIO-via-Timeout-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(Module::Build::Tiny)
 BuildRequires : perl(Test::SharedFork)
 BuildRequires : perl(Test::TCP)
@@ -25,6 +22,15 @@ This archive contains the distribution PerlIO-via-Timeout,
 version 0.32:
 a PerlIO layer that adds read & write timeout to a handle
 
+%package dev
+Summary: dev components for the perl-PerlIO-via-Timeout package.
+Group: Development
+Provides: perl-PerlIO-via-Timeout-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-PerlIO-via-Timeout package.
+
+
 %package license
 Summary: license components for the perl-PerlIO-via-Timeout package.
 Group: Default
@@ -33,19 +39,11 @@ Group: Default
 license components for the perl-PerlIO-via-Timeout package.
 
 
-%package man
-Summary: man components for the perl-PerlIO-via-Timeout package.
-Group: Default
-
-%description man
-man components for the perl-PerlIO-via-Timeout package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n PerlIO-via-Timeout-0.32
-mkdir -p %{_topdir}/BUILD/PerlIO-via-Timeout-0.32/deblicense/
+cd ..
+%setup -q -T -D -n PerlIO-via-Timeout-0.32 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/PerlIO-via-Timeout-0.32/deblicense/
 
 %build
@@ -70,12 +68,12 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-PerlIO-via-Timeout
-cp LICENSE %{buildroot}/usr/share/doc/perl-PerlIO-via-Timeout/LICENSE
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-PerlIO-via-Timeout
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-PerlIO-via-Timeout/LICENSE
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -84,13 +82,13 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/PerlIO/via/README.pod
-/usr/lib/perl5/site_perl/5.26.1/PerlIO/via/Timeout.pm
+/usr/lib/perl5/vendor_perl/5.26.1/PerlIO/via/README.pod
+/usr/lib/perl5/vendor_perl/5.26.1/PerlIO/via/Timeout.pm
 
-%files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-PerlIO-via-Timeout/LICENSE
-
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/PerlIO::via::Timeout.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-PerlIO-via-Timeout/LICENSE

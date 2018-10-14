@@ -1,0 +1,4 @@
+0.32
+perl(Module::Build::Tiny)
+perl(Test::SharedFork)
+perl(Test::TCP)
