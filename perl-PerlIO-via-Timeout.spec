@@ -4,11 +4,11 @@
 #
 Name     : perl-PerlIO-via-Timeout
 Version  : 0.32
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/D/DA/DAMS/PerlIO-via-Timeout-0.32.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DA/DAMS/PerlIO-via-Timeout-0.32.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperlio-via-timeout-perl/libperlio-via-timeout-perl_0.32-1.debian.tar.xz
-Summary  : 'a PerlIO layer that adds read & write timeout to a handle'
+Summary  : a PerlIO layer that adds read & write timeout to a handle
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-PerlIO-via-Timeout-license = %{version}-%{release}
@@ -26,6 +26,7 @@ a PerlIO layer that adds read & write timeout to a handle
 Summary: dev components for the perl-PerlIO-via-Timeout package.
 Group: Development
 Provides: perl-PerlIO-via-Timeout-devel = %{version}-%{release}
+Requires: perl-PerlIO-via-Timeout = %{version}-%{release}
 
 %description dev
 dev components for the perl-PerlIO-via-Timeout package.
@@ -44,7 +45,7 @@ license components for the perl-PerlIO-via-Timeout package.
 cd ..
 %setup -q -T -D -n PerlIO-via-Timeout-0.32 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/PerlIO-via-Timeout-0.32/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/PerlIO-via-Timeout-0.32/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
