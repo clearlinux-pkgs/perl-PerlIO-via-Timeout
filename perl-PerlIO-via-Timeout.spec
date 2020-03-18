@@ -4,7 +4,7 @@
 #
 Name     : perl-PerlIO-via-Timeout
 Version  : 0.32
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/D/DA/DAMS/PerlIO-via-Timeout-0.32.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DA/DAMS/PerlIO-via-Timeout-0.32.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperlio-via-timeout-perl/libperlio-via-timeout-perl_0.32-1.debian.tar.xz
@@ -82,7 +82,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-PerlIO-via-Timeout
 cp %{_builddir}/PerlIO-via-Timeout-0.32/LICENSE %{buildroot}/usr/share/package-licenses/perl-PerlIO-via-Timeout/278dd1dba8bcbc0a77f47b72c9c54bec445a356c
-cp %{_builddir}/PerlIO-via-Timeout-0.32/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-PerlIO-via-Timeout/a437ddedbd1a6081def9aceff2e815fd555b622a
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-PerlIO-via-Timeout/a437ddedbd1a6081def9aceff2e815fd555b622a
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -107,4 +107,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/PerlIO/via/Timeout.pm
+/usr/lib/perl5/vendor_perl/5.30.2/PerlIO/via/Timeout.pm
