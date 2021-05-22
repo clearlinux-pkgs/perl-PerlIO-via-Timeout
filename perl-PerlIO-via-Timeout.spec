@@ -4,7 +4,7 @@
 #
 Name     : perl-PerlIO-via-Timeout
 Version  : 0.32
-Release  : 18
+Release  : 19
 URL      : https://cpan.metacpan.org/authors/id/D/DA/DAMS/PerlIO-via-Timeout-0.32.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DA/DAMS/PerlIO-via-Timeout-0.32.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libperlio-via-timeout-perl/libperlio-via-timeout-perl_0.32-1.debian.tar.xz
